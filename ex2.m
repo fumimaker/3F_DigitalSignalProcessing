@@ -13,9 +13,9 @@ t = (0:1/Fs:2); % from 0 to 2 second
   % we reduce the amplitude by 0.2 to avoid distotion.
   % add the three tones
 y = 0.2*(sin(2*pi*(A)*t)+ sin(2*pi*(Cs)*t)+sin(2*pi*(E)*t));
-%coef = input('input stretch=');
-coef = 2.0;
-y2 = stretch(y, coef, 8000);
+coef = input('input stretch=');
+
+y2 = stretch(y.', coef, 8000);
 sound(y2, 8000);
 
 %plot(t(1:100), y2(1:100)); % we only draw firt 100 samples
