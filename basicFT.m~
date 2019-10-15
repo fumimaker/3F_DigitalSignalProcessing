@@ -21,8 +21,7 @@ for i=1:numF
     for j = 1:L*Fs
       %a(i) = a(i) + fc(i,j) * f440(j)/L/Fs;
       %b(i) = b(i) + fs(i,j) * f440(j)/L/Fs;
-      a(i) = fc(i,:) * f440'/L/Fs;
-      b(i) = fs(i,:) * f440'/L/Fs;
+      a(i) = fc(i,:) * f440'/L/Fs
     end
 end
 plot(f, a, f, b);
