@@ -14,3 +14,6 @@ fy = fft(y);
 plot(abs(fy)/8000);
 xlabel('frequency (Hz)');
 ylabel('gain');
+disp(A);
+disp(Cs);
+disp(E);
