@@ -9,21 +9,21 @@ Rst = 1e-4;         % Corresponds to 80 dB stopband attenuation
 Fs = 44100;
 L=44100;
 
-Numlpf=5000;
+Numlpf=1000;
 Numhpf=10000;
 f=zeros(L,1);
 for i=1:Numlpf
     f(i)=L;
 end
-%yt
 yt=ifft(f);
+
 f=zeros(L,1);
 for i=1:Numlpf
     f(i)=L;
 end
-yhpf = ifft(f);
+yhpf=ifft(f);
 
-%yiff = 
+yiff=
 plot(real(yt));
 
 % FIR filter design

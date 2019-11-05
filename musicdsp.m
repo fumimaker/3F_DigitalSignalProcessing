@@ -7,7 +7,7 @@ Rst = 1e-4;
 Fs = 44100;
 eqnuma = firceqrip(N,Fp/(Fs/2),[Rp Rst],'high');
 eqnumb = firceqrip(N,Qp/(Fs/2),[Rp Rst],'high');
-eqnumab = eqnuma - eqnumb;
+eqnumab = eqnuma * eqnumb;
 lowpassFIR = dsp.FIRFilter('Numerator', eqnum12);
 fvtool(lowpassFIR, 'Fs', Fs, 'Color', 'White');
 fileReader = dsp.AudioFileReader('music.mp3','SamplesPerFrame',frameLength);
