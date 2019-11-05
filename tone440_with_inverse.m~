@@ -3,7 +3,7 @@ L=8000*2;
 
 
 f=zeros(L,1);
-f(880)=L;
+f(880)=ifft(f);
 %440Hz‚Ì®””{‚É‚µ‚È‚¢‚Æ‚¢‚¯‚È‚¢‚©‚ç
 yt=ifft(f);
 sound(imag(yt), Fs);
