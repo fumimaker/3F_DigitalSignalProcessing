@@ -9,22 +9,23 @@ Rst = 1e-4;         % Corresponds to 80 dB stopband attenuation
 Fs = 44100;
 L=44100;
 
-Numlpf=1000;
+Numlpf=5000;
 Numhpf=10000;
-f=zeros(L,1);
-for i=1:Numlpf
-    f(i)=L;
-end
-yt=ifft(f);
 
 f=zeros(L,1);
 for i=1:Numlpf
     f(i)=L;
 end
-yhpf=ifft(f);
+ylpf=ifft(f);
+f=zeros(L,1);
 
-yiff=
-plot(real(yt));
+for i=1:Numlpf
+    f(i)=L;
+end
+yhpf = ifft(f);
+
+yiff = ylpf*yhpf;
+plot(real(yiff));
 
 % FIR filter design
 %eqnum = firceqrip(N,Fp/(Fs/2),[Rp Rst],'passedge'); % eqnum = vec of coeffs
@@ -35,7 +36,7 @@ plot(real(yt));
 % create a filter
 %lowpassFIR = dsp.FIRFilter('Numerator', eqnum);
 % show the characteristics of the filter
-fvtool(yt, 'Fs', Fs, 'Color', 'White');
+fvtool(yiff, 'Fs', Fs, 'Color', 'White');
 % specify an audio file
 fileReader = dsp.AudioFileReader(...
     'music.mp3',...
@@ -47,7 +48,7 @@ while  ~isDone(fileReader)
        % acquire frame lenth audio stream
     signal = fileReader();
        % apply LPF
-    yy = yt(signal);
+    yy = yiff(signal);
        % write to speaker
     deviceWriter(yy);
        % show
