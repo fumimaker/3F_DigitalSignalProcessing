@@ -20,4 +20,5 @@ for d=1:dep
     end
 end
 buff = uint8(array);
-imshow(buff);
+
+imshow(I);
