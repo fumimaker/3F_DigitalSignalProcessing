@@ -8,7 +8,6 @@ for i=1:r-1
      for j=1:c-1
         if (i == 1)
             imnus1 = i+1;
-            
         else
             imnus1 = i-1;
         end

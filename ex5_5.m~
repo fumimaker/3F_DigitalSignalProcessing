@@ -31,5 +31,6 @@ for i=1:r-1
         dv(i,j) = median(A,'all');
      end
 end
- subplot(1,2,1), image(dv);
- subplot(1,2,2), image(b);
+image(dv);
+ %subplot(1,2,1), image(dv);
+ %subplot(1,2,2), image(b);
