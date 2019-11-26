@@ -1,6 +1,4 @@
 b = imread('dachshund_n.jpg');
-whos b;
-%bw = double(rgb2gray(b));
 [r,c,d] = size(b);
 colormap(gray(256));
 dv = double(zeros(r,c));
