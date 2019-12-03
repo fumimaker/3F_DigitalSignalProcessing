@@ -21,4 +21,4 @@ for i=4:r-3
 end
 % final image shall have unsigned int values
 d = uint8((dv+dh)/2.0);
-image(d);
+imshow(d);
