@@ -2,7 +2,7 @@
 %
 row=600;
 col=600;
-alpha = 1;
+alpha = 0.5;
 nmap = 64;
 colormap(gray(nmap));
 czp = zeros(row,col);
