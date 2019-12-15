@@ -1,4 +1,5 @@
 % color morphology
+% EX5.9ÇÇ‚ÇËÇ‹ÇµÇΩÅB
 % 71708047
 % êÖñÏéjã≈
 
@@ -9,8 +10,8 @@ imshow(Ig);
 P = morph(Is, 'dilate');
 % we can repeat the morphological transformation.
 
-%P = morph(P, 'dilate');
-%P = morph(P, 'dilate');
+P = morph(P, 'dilate');
+P = morph(P, 'dilate');
 
 imshow(P);
 %
