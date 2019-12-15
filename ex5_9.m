@@ -6,21 +6,22 @@ Is = imread('dachshund.jpg');
 Ig = rgb2gray(Is);
 imshow(Ig);
  % the second argument is ferodef for eroding.
-P = morph(Ig, 'dilate');
+P = morph(Is, 'erode');
 % we can repeat the morphological transformation.
 
 P = morph(P, 'dilate');
-P = morph(P, 'erode');
+P = morph(P, 'dilate');
+
 imshow(P);
 %
 % morphology transformation
 %
-function R = morph(Ig, op)
-  [r, c] = size(Ig);
+function R = morph(Is, op)
+  [r, c] = size(Is);
   R = uint8(zeros(r,c));
   for i=1:r
     for j=1:c
-        mc = Ig(i,j);
+        mc = Is(i,j);
         for k = -1:1
             for s = -1:1
                cr = i+k;
@@ -35,10 +36,10 @@ function R = morph(Ig, op)
                elseif (j+s>c)
                    cc = 2*c - j-s;
                end
-               if Ig(cr,cc) < mc && strcmp(op, 'dilate')
-                   mc = Ig(cr,cc);
-               elseif Ig(cr,cc) > mc && strcmp(op, 'erode')
-                   mc = Ig(cr,cc);
+               if Is(cr,cc) < mc && strcmp(op, 'dilate')
+                   mc = Is(cr,cc);
+               elseif Is(cr,cc) > mc && strcmp(op, 'erode')
+                   mc = Is(cr,cc);
                end
             end
         end
