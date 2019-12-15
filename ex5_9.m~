@@ -19,10 +19,10 @@ imshow(P);
 function R = morph(Is, op)
   [r, c, d] = size(Is);
   R = uint8(zeros(r,c,d));
-  for a=1:d
-    for i=1:r
+  for d=1:d
+      for i=1:r
         for j=1:c
-            mc = Is(i,j,a);
+            mc = Is(i,j);
             for k = -1:1
                 for s = -1:1
                    cr = i+k;
@@ -37,15 +37,15 @@ function R = morph(Is, op)
                    elseif (j+s>c)
                        cc = 2*c - j-s;
                    end
-                   if Is(cr,cc,a) < mc && strcmp(op, 'dilate')
-                       mc = Is(cr,cc,a);
-                   elseif Is(cr,cc,a) > mc && strcmp(op, 'erode')
-                       mc = Is(cr,cc,a);
+                   if Is(cr,cc) < mc && strcmp(op, 'dilate')
+                       mc = Is(cr,cc);
+                   elseif Is(cr,cc) > mc && strcmp(op, 'erode')
+                       mc = Is(cr,cc);
                    end
                 end
             end
-            R(i,j,a) = mc;
+            R(i,j) = mc;
         end
-    end
+      end
   end
 end

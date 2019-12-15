@@ -4,10 +4,9 @@ Is = imread('dachshund.jpg');
 Ig = rgb2gray(Is);
 imshow(Ig);
  % the second argument is ÅferodeÅf for eroding.
-P = morph(Ig, 'dilate');
+%P = morph(Ig, 'dilate');
 % we can repeat the morphological transformation.
 
-P = morph(P, 'dilate');
 P = morph(P, 'dilate');
 imshow(P);
 %
