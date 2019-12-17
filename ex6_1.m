@@ -1,4 +1,4 @@
-% example of voice record
+%% example of voice record
 recObj = audiorecorder(16000, 16, 1); % create a recorder object with sampling rate 16000 Hz
 disp("Start speaking"); % print out a start message
 recordblocking(recObj, 5); % record the voice for 5 seconds
@@ -8,19 +8,19 @@ play(recObj); % play back the voice
 y = getaudiodata(recObj);
 plot(y) % visualize the array
 audiowrite('voice.wav', y, 16000); % save the audio data as a wave file. 
+disp("modulate");
 
 %%  modulate5k440.m
-%    a 440 Hz tone is modulated
-%    onto 5kHz carrier
-
+[sample] = audioread('voice.wav');
 Fs = 16000; % sampling rate
 fx = 440; % baseband signal freq.
 Fc = 5000; %carrier frequency
-Len = 2; % 2 seconds duration
+Len = 5; % 2 seconds duration
 t = (0:1/Fs:Len-1/Fs); % from 0 to 2 second
-x = (1+sin(2*pi*fx*t)); %baseband signal (positive)
+%x = (1+sin(2*pi*fx*t)); %baseband signal (positive)
 f = (1/Len:1/Len:Fs); % frquency components
-y = x .* cos(2*pi*Fc*t); %superpose (modulation)
+%y = x .* cos(2*pi*Fc*t); %superpose (modulation)
+y = sample .* cos(2*pi*Fc*t);
 sound(y, Fs);
 plot(f, abs(fft(y)));
 figure;
