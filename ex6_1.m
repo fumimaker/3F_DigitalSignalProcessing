@@ -20,7 +20,7 @@ Len = 5; % 2 seconds duration
 t = (0:1/Fs:Len-1/Fs); % from 0 to 2 second
 x = (1+sin(2*pi*fx*t)); %baseband signal (positive)
 f = (1/Len:1/Len:Fs); % frquency components
-y = x .* cos(2*pi*Fc*t); %superpose (modulation)
+y = sample' .* sin(2*pi*Fc*t); %superpose (modulation)
 %y = sample .* cos(2*pi*Fc*t);
 sound(y, Fs);
 plot(f, abs(fft(y)));
