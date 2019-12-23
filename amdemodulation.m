@@ -14,3 +14,6 @@ Rst = 1e-6;       % Corresponds to 80 dB stopband attenuation
 eqnum = firceqrip(20,Fc/(Fss/2),[Rp Rst],'passedge');
 fvtool(eqnum,'Fs',Fss,'Color','White') % Visualize filter
 lowpassFIR = dsp.FIRFilter('Numerator', eqnum); %apply LPF
+z = lowpassFIR(z2c');
+fz = resample(z, d, n); %change the sampling frequency
+sound(fz, Fs);
