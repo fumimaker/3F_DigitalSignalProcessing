@@ -3,7 +3,7 @@
 Fs = 20000;
 Fc = 5000; %carrier frequency
 dev = 0.2;  %adjust sigma
-[v, Fvs] = audioread('voice.wav');
+[v, Fvs] = audioread('seyana.wav');
 [n, d] = rat(Fvs/Fs);
 vrr = resample(v, d, n);
 [r, c] = size(vrr);
@@ -19,4 +19,7 @@ title('modulated signal')
 subplot(2,1,2)
 plot(vrr)
 title('baseband signal')
+
+
+
 audiowrite('voice5k20kfm.wav', y, Fs);
