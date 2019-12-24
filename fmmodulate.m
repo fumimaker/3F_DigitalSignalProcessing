@@ -3,7 +3,7 @@
 Fs = 20000;
 Fc = 5000; %carrier frequency
 dev = 0.2;  %adjust sigma
-[v, Fvs] = audioread('seyana.wav');
+[v, Fvs] = audioread('seyanaTrim.wav');
 [n, d] = rat(Fvs/Fs);
 vrr = resample(v, d, n);
 [r, c] = size(vrr);

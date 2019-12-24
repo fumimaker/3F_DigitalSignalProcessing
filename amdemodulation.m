@@ -2,7 +2,7 @@
 %
 Fs = 20000; %audio out sampling
 Fc = 5000;   %carrier freqency
-[yy, Fss] = audioread('test.wav');
+[yy, Fss] = audioread('seyanaTrim.wav');
 [n,d] = rat(Fss/Fs);
 [r,c] = size(yy);
 t = (0:1/Fss:r/Fss-1/Fss);

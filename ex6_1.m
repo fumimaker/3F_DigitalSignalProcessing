@@ -12,7 +12,7 @@ audiowrite('voice.wav', y, 16000); % save the audio data as a wave file.
 disp("modulate");
 
 
-[sample] = audioread('voice.wav');
+[sample] = audioread('seyana.wav');
 Fs = 16000; % sampling rate
 fx = 440; % baseband signal freq.
 Fc = 5000; %carrier frequency
