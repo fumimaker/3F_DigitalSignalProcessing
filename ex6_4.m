@@ -1,5 +1,7 @@
-%%  voice data fm modulate
-%
+%%  71708047
+%   水野史暁
+%   わかりませんでした...atan使って角度出せばいけるかなと思いました..
+
 Fs = 20000;
 Fc = 5000; %carrier frequency
 dev = 0.2;  %adjust sigma
@@ -25,4 +27,4 @@ for i=1:r
     maru(i,1) = atan(y(i,2)/y(i,1));
 end
 
-audiowrite('seyana5k20kfm.wav', maru, Fs);
+audiowrite('seyanaTrimDemodulated.wav', maru, Fs);
