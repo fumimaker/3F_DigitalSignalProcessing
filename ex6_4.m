@@ -2,7 +2,7 @@
 %   水野史暁
 %   わかりませんでした...atan使って角度出せばいけるかなと思いました..
 
-Fs = 20000;
+Fs = 44100;
 Fc = 5000; %carrier frequency
 dev = 0.2;  %adjust sigma
 [v, Fvs] = audioread('seyanaTrim.wav');
@@ -21,10 +21,23 @@ title('modulated signal')
 subplot(2,1,2)
 plot(vrr)
 title('baseband signal')
+audiowrite('seyana5k20kfm.wav', y, Fs);
 
-maru = zeros(r,1);
-for i=1:r
-    maru(i,1) = atan(y(i,2)/y(i,1));
+
+Fc = 5000;
+Fs = 44100;
+dev = 1; %adjust sigma
+[y, Fss] = audioread('seyana5k20kfm.wav');
+[r, c] = size(y);
+[n, d] = rat(Fss/Fs);
+x = zeros(r,1);
+for i=1:r-1
+    x(i+1)=x(i)+(acos((y(i+1,1)*y(i,1)+y(i+1,2)...
+    *y(i,2))/(sqrt(y(i+1,1)^2+y(i+1,2)^2)*sqrt(...
+    y(i,1)^2+y(i,2)^2)))-2*pi()*Fc/Fss)/dev;
 end
+yy=resample(x,d,n);
+%sound(yy,Fs);
+plot(yy);
 
-audiowrite('seyanaTrimDemodulated.wav', maru, Fs);
+audiowrite('seyanaTrimDemodulated.wav', yy, Fs);
