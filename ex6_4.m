@@ -26,7 +26,7 @@ audiowrite('seyana5k20kfm.wav', y, Fs);
 
 Fc = 5000;
 Fs = 44100;
-dev = 0.1; %adjust sigma
+dev = 0.01; %adjust sigma
 [y, Fss] = audioread('seyana5k20kfm.wav');
 [r, c] = size(y);
 [n, d] = rat(Fss/Fs);

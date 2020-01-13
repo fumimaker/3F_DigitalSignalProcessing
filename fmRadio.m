@@ -14,7 +14,7 @@ title('modulated signal')
 subplot(2,1,2)
 plot(vrr)
 title('baseband signal')
-audiowrite('seyana5k20kfm.wav', y, Fs);
+audiowrite('seyana5k20kfm2.wav', y, Fs);
 
 z = fmdemod(y, Fc, Fs, dev); 
 
