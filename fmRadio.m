@@ -8,14 +8,9 @@ dev = 500;  %adjust sigma
 
 y = fmmod(v, Fc, Fs, dev);
 
-subplot(2,1,1)
-plot(y(:,1));
-title('modulated signal')
-subplot(2,1,2)
-plot(vrr)
-title('baseband signal')
 audiowrite('seyana5k20kfm2.wav', y, Fs);
 
 z = fmdemod(y, Fc, Fs, dev); 
 
 audiowrite('seyanaTrimDemodulated2.wav', z, Fs);
+
