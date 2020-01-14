@@ -1,10 +1,9 @@
 %%  71708047
 %   …–ìj‹Å
 %   ‚í‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½...atang‚Á‚ÄŠp“xo‚¹‚Î‚¢‚¯‚é‚©‚È‚Æv‚¢‚Ü‚µ‚½..
-
+Fc = 100000; %carrier frequency
 Fs = 44100;
-Fc = 5000; %carrier frequency
-dev = 0.001;  %adjust sigma
+dev = 0.01;  %adjust sigma
 [v, Fvs] = audioread('seyanaTrim.wav');
 [n, d] = rat(Fvs/Fs); % —L—”‹ß—(‰¹Œ¹ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg/‚â‚è‚½‚¢ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg)
 vrr = resample(v, d, n); % ƒŠƒTƒ“ƒvƒŠƒ“ƒOi—~‚µ‚¢ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg‚ÅƒTƒ“ƒvƒ‹‚µ’¼‚·“I‚ÈHj
@@ -12,8 +11,8 @@ vrr = resample(v, d, n); % ƒŠƒTƒ“ƒvƒŠƒ“ƒOi—~‚µ‚¢ƒTƒ“ƒvƒŠƒ“ƒOƒŒ[ƒg‚ÅƒTƒ“ƒvƒ‹‚µ’
 t = (0:1/Fs:r/Fs-1/Fs);
 y = zeros(r,2); % IQ signal storage
 for i=1:r
-    y(i,1) = cos(2*pi()*(Fc+vrr(i)*dev)*t(i));
-    y(i,2) = sin(2*pi()*(Fc+vrr(i)*dev)*t(i));
+    y(i,1) = cos(2*pi()*(Fc+vrr(i,1)*dev)*t(i));
+    y(i,2) = sin(2*pi()*(Fc+vrr(i,1)*dev)*t(i));
 end
 subplot(2,1,1)
 plot(y(:,1));
@@ -24,7 +23,7 @@ title('baseband signal')
 audiowrite('seyana5k20kfm.wav', y, Fs);
 
 
-Fc = 5000;
+Fc = 100000;
 Fs = 44100;
 dev = 0.01; %adjust sigma
 [y, Fss] = audioread('seyana5k20kfm.wav');
@@ -32,7 +31,8 @@ dev = 0.01; %adjust sigma
 [n, d] = rat(Fss/Fs);
 x = zeros(r,1);
 for i=1:r-1
-    x(i+1)=x(i)+(acos((y(i+1,1)*y(i,1)+y(i+1,2)*y(i,2))/(sqrt(y(i+1,1)^2+y(i+1,2)^2)*sqrt(y(i,1)^2+y(i,2)^2)))-2*pi()*Fc/Fss)/dev;
+    x(i+1)=x(i)+(acos((y(i+1,1)*y(i,1)+y(i+1,2)*y(i,2))...
+        /(sqrt(y(i+1,1)^2+y(i+1,2)^2)*sqrt(y(i,1)^2+y(i,2)^2)))-2*pi()*Fc/Fss)/dev;
 end
 yy=resample(x,d,n);
 %sound(yy,Fs);
