@@ -36,6 +36,6 @@ for i=1:r-1
 end
 yy=resample(x,d,n);
 %sound(yy,Fs);
-plot(yy);
-sound(yy,Fvs);
-%audiowrite('seyanaTrimDemodulated.wav', yy, Fs);
+%plot(yy);
+%sound(yy,Fvs);
+audiowrite('seyanaTrimDemodulated.wav', yy, Fs);
