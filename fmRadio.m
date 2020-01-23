@@ -1,7 +1,11 @@
-%  71708047
+%   71708047
+%   総合政策学部3年
 %   水野史暁
+%
+%   使用環境の問題でFMラジオが入らなかったです．
+%   三次さんから頂いたFM音源の復調と音声出力を行いました．
 
-frameLength = 4000;
+frameLength = 2000;
 N   = 3000;        % FIR filter order
 Fp  = 15000;       % 15 kHz passband-edge frequency
 Rp  = 0.00057565; % Corresponds to 0.01 dB peak-to-peak ripple
