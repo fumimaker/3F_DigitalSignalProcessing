@@ -41,25 +41,28 @@ lowpassFIR = dsp.FIRFilter('Numerator', eqnum);
 % show the characteristics of the filter
 fvtool(lowpassFIR, 'Fs', Fs, 'Color', 'White');
 scope = dsp.SpectrumAnalyzer('SampleRate', iqr.SampleRate);
-while ~isDone(iqr)
-    audiodata = iqr();
-    y(:,1) = audiodata(:,1);
-    y(:,2) = audiodata(:,2);
-    for i=1:frameLength-1
-        %omega = acos( (y(i+1,1)*y(i,1)+y(i+1,2)*y(i,2)) / (sqrt(y(i+1,1)^2+y(i+1,2)^2) * sqrt(y(i,1)^2+y(i,2)^2)) );
-        omega = angle(complex(y(i+1,1),y(i+1,2)) .* complex(y(i,1), -y(i,2)));
-        x(i) = omega*Fs/2/pi/dev;
+if ~isempty(sdrinfo(h.RadioAddress))
+    while(1)
+        audiodata = step(h);
+        y(:,1) = audiodata;
+        y(:,2) = audiodata;
+        for i=1:frameLength-1
+            omega = acos( (y(i+1,1)*y(i,1)+y(i+1,2)*y(i,2)) / (sqrt(y(i+1,1)^2+y(i+1,2)^2) * sqrt(y(i,1)^2+y(i,2)^2)) );
+            %omega = angle(complex(y(i+1,1),y(i+1,2)) .* complex(y(i,1), -y(i,2)));
+            x(i) = omega*Fs/2/pi/dev;
+        end
+        yy=resample(x,sample,Fs);
+        yy=real(yy);
+        %player(yy); 
+        % apply LPF
+        z = lowpassFIR(yy);
+        zz = notchfilt(z);
+        % write to speaker
+        player(zz);
+        % show
+        scope([yy,z,zz]);
     end
-    yy=resample(x,sample,Fs);
-    yy=real(yy);
-    %player(yy); 
-    % apply LPF
-    z = lowpassFIR(yy);
-    zz = notchfilt(z);
-    % write to speaker
-    player(zz);
-    % show
-    scope([yy,z,zz]);
+    
 end
 release(iqr);
 release(player);
