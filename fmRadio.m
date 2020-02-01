@@ -32,6 +32,7 @@ lowpassFIR = dsp.FIRFilter('Numerator', eqnum);
 % show the characteristics of the filter
 fvtool(lowpassFIR, 'Fs', Fs, 'Color', 'White');
 scope = dsp.SpectrumAnalyzer('SampleRate', iqr.SampleRate);
+
 while ~isDone(iqr)
     audiodata = iqr();
     y(:,1) = audiodata(:,1);
